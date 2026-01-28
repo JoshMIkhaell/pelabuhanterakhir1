@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untuk Kamu</title>
+
     <style>
         * {
             margin: 0;
@@ -26,273 +27,181 @@
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.15) 0%, transparent 50%);
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(220,20,60,.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139,0,0,.15) 0%, transparent 50%);
             animation: pulse 8s ease-in-out infinite;
             pointer-events: none;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+            0%,100% { opacity:.5 }
+            50% { opacity:.8 }
         }
 
         .rose {
             position: fixed;
-            font-size: 40px;
+            font-size: 38px;
             animation: float 6s ease-in-out infinite;
-            opacity: 0.3;
+            opacity: .3;
             pointer-events: none;
-            filter: drop-shadow(0 0 10px rgba(220, 20, 60, 0.5));
         }
 
-        .rose:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
-        .rose:nth-child(2) { top: 20%; right: 20%; animation-delay: 1s; }
-        .rose:nth-child(3) { bottom: 15%; left: 10%; animation-delay: 2s; }
-        .rose:nth-child(4) { bottom: 25%; right: 15%; animation-delay: 3s; }
-        .rose:nth-child(5) { top: 50%; left: 5%; animation-delay: 1.5s; }
-        .rose:nth-child(6) { top: 60%; right: 8%; animation-delay: 2.5s; }
+        .rose:nth-child(1){top:10%;left:15%}
+        .rose:nth-child(2){top:20%;right:20%}
+        .rose:nth-child(3){bottom:15%;left:10%}
+        .rose:nth-child(4){bottom:25%;right:15%}
+        .rose:nth-child(5){top:50%;left:5%}
+        .rose:nth-child(6){top:60%;right:8%}
 
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translateY(-15px) rotate(5deg) scale(1.05);
-            }
-            50% {
-                transform: translateY(-25px) rotate(-5deg) scale(1.1);
-            }
-            75% {
-                transform: translateY(-15px) rotate(3deg) scale(1.05);
-            }
+            0%,100% {transform:translateY(0)}
+            50% {transform:translateY(-25px)}
         }
 
         .container {
-            background: linear-gradient(135deg, #fff5f5 0%, #ffe4e4 100%);
-            max-width: 650px;
+            background: linear-gradient(135deg,#fff5f5,#ffe4e4);
+            max-width: 720px;
             width: 100%;
             padding: 50px;
             border-radius: 30px;
-            box-shadow: 
-                0 30px 80px rgba(139, 0, 0, 0.4),
-                inset 0 0 50px rgba(220, 20, 60, 0.1);
+            box-shadow: 0 30px 80px rgba(139,0,0,.4);
             position: relative;
-            animation: fadeIn 1.5s ease-in;
-            border: 3px solid rgba(220, 20, 60, 0.3);
             z-index: 10;
+            animation: fadeIn 1.3s ease;
         }
 
         .container::before {
-            content: '🌹';
+            content: "🌹";
             position: absolute;
-            top: -30px;
+            top: -28px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 60px;
-            filter: drop-shadow(0 5px 15px rgba(220, 20, 60, 0.6));
-            animation: roseGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes roseGlow {
-            0%, 100% {
-                filter: drop-shadow(0 5px 15px rgba(220, 20, 60, 0.6));
-            }
-            50% {
-                filter: drop-shadow(0 8px 25px rgba(220, 20, 60, 0.9));
-            }
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from {opacity:0; transform:translateY(40px)}
+            to {opacity:1; transform:none}
         }
 
         h1 {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            text-align: center;
+            font-size: 2.7em;
+            margin-bottom: 35px;
+            background: linear-gradient(135deg,#dc143c,#8b0000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2.8em;
-            text-shadow: 0 2px 10px rgba(220, 20, 60, 0.3);
-            font-weight: bold;
         }
 
         .letter-content {
-            line-height: 2;
-            color: #4a2020;
-            margin-bottom: 30px;
-            text-align: justify;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255,255,255,.6);
             padding: 30px;
             border-radius: 15px;
+            line-height: 2;
+            color: #4a2020;
+            text-align: justify;
             border-left: 5px solid #dc143c;
-            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.1);
         }
 
         .letter-content p {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .letter-content p:first-of-type::first-letter {
-            font-size: 3em;
+            font-size: 2.8em;
             font-weight: bold;
             float: left;
-            line-height: 0.8;
-            margin: 0.1em 0.1em 0 0;
+            margin-right: 6px;
+            line-height: .8;
             color: #dc143c;
         }
 
         .signature {
+            margin-top: 25px;
             text-align: right;
             font-style: italic;
             color: #8b0000;
-            margin-top: 30px;
-            font-size: 1.1em;
             font-weight: 600;
         }
 
         .btn {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            color: white;
-            border: none;
-            padding: 18px 40px;
+            margin: 30px auto 0;
+            display: block;
+            padding: 18px 42px;
             border-radius: 50px;
+            border: none;
             cursor: pointer;
             font-size: 18px;
             font-weight: bold;
-            display: block;
-            margin: 30px auto 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.6);
-        }
-
-        .btn span {
-            position: relative;
-            z-index: 1;
+            background: linear-gradient(135deg,#dc143c,#8b0000);
+            color: #fff;
         }
 
         .hidden-message {
             display: none;
-            background: linear-gradient(135deg, #fff0f0 0%, #ffe0e0 100%);
-            padding: 25px;
-            border-radius: 15px;
             margin-top: 25px;
-            border: 2px solid #dc143c;
-            animation: slideIn 0.5s ease;
-            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.2);
-        }
-
-        .hidden-message p {
-            color: #8b0000;
-            font-size: 1.1em;
+            padding: 22px;
+            border-radius: 15px;
             text-align: center;
+            background: #fff0f0;
+            border: 2px solid #dc143c;
+            color: #8b0000;
             font-weight: 600;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* =====================
+           RESPONSIVE MOBILE
+        ===================== */
+        @media (max-width: 600px) {
 
-        .petals-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        .petal {
-            position: absolute;
-            font-size: 25px;
-            animation: fall 8s linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes fall {
-            0% {
-                opacity: 0;
-                transform: translateY(-100px) rotate(0deg);
+            body {
+                padding: 10px;
+                align-items: flex-start;
             }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
 
-        .decorative-rose {
-            position: absolute;
-            opacity: 0.15;
-            font-size: 80px;
-        }
+            .container {
+                padding: 25px 20px;
+                margin-top: 25px;
+                border-radius: 22px;
+            }
 
-        .decorative-rose.top-left {
-            top: 20px;
-            left: 20px;
-            transform: rotate(-15deg);
-        }
+            h1 {
+                font-size: 1.9em;
+                margin-bottom: 25px;
+            }
 
-        .decorative-rose.bottom-right {
-            bottom: 20px;
-            right: 20px;
-            transform: rotate(15deg);
+            .letter-content {
+                padding: 20px;
+                font-size: .95em;
+                line-height: 1.8;
+            }
+
+            .letter-content p:first-of-type::first-letter {
+                font-size: 2.1em;
+            }
+
+            .btn {
+                font-size: 16px;
+                padding: 14px 30px;
+            }
+
+            .container::before {
+                font-size: 45px;
+                top: -20px;
+            }
+
+            .rose {
+                font-size: 26px;
+                opacity: .2;
+            }
         }
     </style>
 </head>
+
 <body>
+
     <div class="rose">🌹</div>
     <div class="rose">🌹</div>
     <div class="rose">🌹</div>
@@ -300,111 +209,45 @@
     <div class="rose">🌹</div>
     <div class="rose">🌹</div>
 
-    <div class="petals-container" id="petalsContainer"></div>
-    
     <div class="container">
-        <div class="decorative-rose top-left">🌹</div>
-        <div class="decorative-rose bottom-right">🌹</div>
-
         <h1>💌 Untuk Kamu 💌</h1>
-        
+
         <div class="letter-content">
             <p>Halo sayang,</p>
-            
-            <p>Aku menulis surat ini dengan hati yang penuh rasa syukur karena telah mengenalmu. Setiap hari bersamamu adalah hadiah yang tak ternilai, dan aku ingin kamu tahu betapa berartinya kamu bagiku.</p>
-            
-            <p>Senyummu adalah cahaya yang menerangi hariku, tawamu adalah melodi terindah yang pernah kudengar. Kehadiranmu membuat segalanya menjadi lebih bermakna dan indah.</p>
-            
-            <p>Seperti mawar merah yang melambangkan cinta sejati, begitulah perasaanku untukmu. Indah, tulus, dan abadi. Kamu adalah bunga terindah dalam taman hidupku.</p>
-            
-            <p>Aku berjanji akan selalu ada untukmu, dalam suka maupun duka. Akan selalu mendukungmu meraih mimpi-mimpimu, dan menjadi tempat ternyaman untukmu pulang.</p>
-            
-            <p>Terima kasih sudah menjadi bagian dari hidupku. Terima kasih sudah menjadi dirimu yang luar biasa.</p>
-            
+
+            <p>
+                Aku menulis surat ini dengan hati yang penuh rasa syukur karena telah mengenalmu.
+                Setiap hari bersamamu adalah hadiah yang tak ternilai,
+                dan aku ingin kamu tahu betapa berartinya kamu bagiku.
+            </p>
+
+            <p>
+                Senyummu adalah cahaya yang menerangi hariku,
+                tawamu adalah melodi terindah yang pernah kudengar.
+                Kehadiranmu membuat segalanya menjadi lebih bermakna dan indah.
+            </p>
+
+            <p>
+                Seperti mawar merah yang melambangkan cinta sejati,
+                begitulah perasaanku untukmu — tulus, hangat, dan abadi.
+            </p>
+
             <div class="signature">
                 Dengan cinta,<br>
                 Yang selalu menyayangimu ❤️
             </div>
         </div>
 
-        <button class="btn" onclick="showMessage()">
-            <span>Klik untuk Pesan Khusus 🌹</span>
+        <button class="btn" onclick="document.getElementById('msg').style.display='block'">
+            🌹 Klik untuk Pesan Khusus
         </button>
-        
-        <div class="hidden-message" id="hiddenMessage">
-            <p>🌹 <strong>P.S.</strong> Kamu adalah alasan terbaik aku tersenyum setiap hari. Seperti mawar merah, cintaku untukmu tidak akan pernah layu. I love you! 💖 🌹</p>
+
+        <div class="hidden-message" id="msg">
+            💖 Kamu adalah alasan terbaik aku tersenyum setiap hari.  
+            Terima kasih sudah hadir dalam hidupku 🤍
         </div>
+
     </div>
 
-    <script>
-        function showMessage() {
-            const msg = document.getElementById('hiddenMessage');
-            msg.style.display = 'block';
-            createFallingPetals();
-            createRoseExplosion();
-        }
-
-        function createFallingPetals() {
-            const container = document.getElementById('petalsContainer');
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const petal = document.createElement('div');
-                    petal.className = 'petal';
-                    petal.innerHTML = '🌹';
-                    petal.style.left = Math.random() * 100 + '%';
-                    petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
-                    petal.style.animationDelay = Math.random() * 2 + 's';
-                    petal.style.fontSize = (Math.random() * 15 + 20) + 'px';
-                    container.appendChild(petal);
-                    
-                    setTimeout(() => petal.remove(), 10000);
-                }, i * 100);
-            }
-        }
-
-        function createRoseExplosion() {
-            const container = document.getElementById('petalsContainer');
-            for (let i = 0; i < 20; i++) {
-                const rose = document.createElement('div');
-                rose.innerHTML = '🌹';
-                rose.style.position = 'absolute';
-                rose.style.left = '50%';
-                rose.style.top = '50%';
-                rose.style.fontSize = (Math.random() * 20 + 25) + 'px';
-                rose.style.transition = 'all 2s ease-out';
-                rose.style.pointerEvents = 'none';
-                container.appendChild(rose);
-                
-                setTimeout(() => {
-                    const angle = (i / 20) * Math.PI * 2;
-                    const distance = Math.random() * 300 + 200;
-                    const x = Math.cos(angle) * distance;
-                    const y = Math.sin(angle) * distance;
-                    
-                    rose.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 720}deg)`;
-                    rose.style.opacity = '0';
-                }, 50);
-                
-                setTimeout(() => rose.remove(), 2500);
-            }
-        }
-
-        window.onload = () => {
-            const container = document.getElementById('petalsContainer');
-            setInterval(() => {
-                if (Math.random() > 0.7) {
-                    const petal = document.createElement('div');
-                    petal.className = 'petal';
-                    petal.innerHTML = '🌹';
-                    petal.style.left = Math.random() * 100 + '%';
-                    petal.style.animationDuration = (Math.random() * 5 + 7) + 's';
-                    petal.style.fontSize = (Math.random() * 10 + 18) + 'px';
-                    container.appendChild(petal);
-                    
-                    setTimeout(() => petal.remove(), 12000);
-                }
-            }, 800);
-        };
-    </script>
 </body>
 </html>
