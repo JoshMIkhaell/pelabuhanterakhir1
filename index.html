@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untuk Kamu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --primary: #8b0000;
+            --accent: #dc143c;
+            --bg-dark: #1a0a0a;
+            --text-dark: #4a2020;
+            --cream: #fff9f5;
+            --rose-light: #ffe4e4;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,188 +23,439 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #2c1810 0%, #8b0000 50%, #2c1810 100%);
+            font-family: 'Crimson Text', serif;
+            background: radial-gradient(ellipse at top, #2c1810 0%, var(--bg-dark) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px 20px;
             overflow-x: hidden;
             position: relative;
         }
 
-        body::before {
+        /* Ambient background particles */
+        body::before,
+        body::after {
             content: '';
             position: fixed;
-            inset: 0;
-            background-image:
-                radial-gradient(circle at 20% 30%, rgba(220,20,60,.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139,0,0,.15) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0;
+            animation: glow 6s ease-in-out infinite;
             pointer-events: none;
         }
 
-        @keyframes pulse {
-            0%,100% { opacity:.5 }
-            50% { opacity:.8 }
+        body::before {
+            top: 10%;
+            left: 15%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220,20,60,0.3), transparent);
+            animation-delay: 0s;
         }
 
-        .rose {
+        body::after {
+            bottom: 10%;
+            right: 15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139,0,0,0.25), transparent);
+            animation-delay: 3s;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        /* Floating rose petals */
+        .rose-petal {
             position: fixed;
-            font-size: 38px;
-            animation: float 6s ease-in-out infinite;
-            opacity: .3;
+            font-size: 32px;
+            opacity: 0;
             pointer-events: none;
+            animation: fallAndFade 12s ease-in-out infinite;
+            filter: blur(0.5px);
         }
 
-        .rose:nth-child(1){top:10%;left:15%}
-        .rose:nth-child(2){top:20%;right:20%}
-        .rose:nth-child(3){bottom:15%;left:10%}
-        .rose:nth-child(4){bottom:25%;right:15%}
-        .rose:nth-child(5){top:50%;left:5%}
-        .rose:nth-child(6){top:60%;right:8%}
+        .rose-petal:nth-child(1) { top: -50px; left: 10%; animation-delay: 0s; }
+        .rose-petal:nth-child(2) { top: -50px; left: 30%; animation-delay: 2s; }
+        .rose-petal:nth-child(3) { top: -50px; left: 50%; animation-delay: 4s; }
+        .rose-petal:nth-child(4) { top: -50px; left: 70%; animation-delay: 6s; }
+        .rose-petal:nth-child(5) { top: -50px; left: 90%; animation-delay: 8s; }
+        .rose-petal:nth-child(6) { top: -50px; left: 20%; animation-delay: 10s; }
 
-        @keyframes float {
-            0%,100% {transform:translateY(0)}
-            50% {transform:translateY(-25px)}
+        @keyframes fallAndFade {
+            0% { 
+                opacity: 0; 
+                transform: translateY(0) rotate(0deg); 
+            }
+            10% { 
+                opacity: 0.6; 
+            }
+            90% { 
+                opacity: 0.3; 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(100vh) rotate(360deg); 
+            }
         }
 
         .container {
-            background: linear-gradient(135deg,#fff5f5,#ffe4e4);
-            max-width: 720px;
+            background: linear-gradient(145deg, var(--cream) 0%, var(--rose-light) 100%);
+            max-width: 780px;
             width: 100%;
-            padding: 50px;
-            border-radius: 30px;
-            box-shadow: 0 30px 80px rgba(139,0,0,.4);
+            padding: 60px;
+            border-radius: 40px;
+            box-shadow: 
+                0 50px 100px rgba(139,0,0,0.3),
+                0 20px 40px rgba(139,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.8);
             position: relative;
             z-index: 10;
-            animation: fadeIn 1.3s ease;
+            animation: containerFadeIn 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(220,20,60,0.1);
+        }
+
+        @keyframes containerFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(60px) scale(0.95);
+                filter: blur(10px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* Decorative corner ornaments */
+        .container::before,
+        .container::after {
+            content: '🌹';
+            position: absolute;
+            font-size: 48px;
+            opacity: 0.15;
+            animation: rotateOrnament 20s linear infinite;
         }
 
         .container::before {
-            content: "🌹";
-            position: absolute;
-            top: -28px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 60px;
+            top: 20px;
+            left: 20px;
         }
 
-        @keyframes fadeIn {
-            from {opacity:0; transform:translateY(40px)}
-            to {opacity:1; transform:none}
+        .container::after {
+            bottom: 20px;
+            right: 20px;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotateOrnament {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Top rose decoration */
+        .top-rose {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 70px;
+            filter: drop-shadow(0 8px 16px rgba(139,0,0,0.4));
+            animation: floatRose 3s ease-in-out infinite;
+        }
+
+        @keyframes floatRose {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
         }
 
         h1 {
+            font-family: 'Cormorant Garamond', serif;
             text-align: center;
-            font-size: 2.7em;
-            margin-bottom: 35px;
-            background: linear-gradient(135deg,#dc143c,#8b0000);
+            font-size: 3.2em;
+            font-weight: 300;
+            margin-bottom: 45px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 50%, #6b0000 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            animation: titleFadeIn 1.8s ease-out 0.3s both;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        @keyframes titleFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(-20px);
+                letter-spacing: 10px;
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0);
+                letter-spacing: 2px;
+            }
         }
 
         .letter-content {
-            background: rgba(255,255,255,.6);
-            padding: 30px;
-            border-radius: 15px;
-            line-height: 2;
-            color: #4a2020;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            line-height: 2.1;
+            color: var(--text-dark);
             text-align: justify;
-            border-left: 5px solid #dc143c;
+            font-size: 1.1em;
+            border-left: 6px solid var(--accent);
+            box-shadow: 
+                0 8px 32px rgba(139,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            animation: contentFadeIn 2s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background pattern */
+        .letter-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(220,20,60,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes contentFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
         }
 
         .letter-content p {
-            margin-bottom: 18px;
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 1;
         }
 
         .letter-content p:first-of-type::first-letter {
-            font-size: 2.8em;
-            font-weight: bold;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4em;
+            font-weight: 600;
             float: left;
-            margin-right: 6px;
-            line-height: .8;
-            color: #dc143c;
+            margin-right: 10px;
+            margin-top: 8px;
+            line-height: 0.8;
+            color: var(--accent);
+            text-shadow: 2px 2px 8px rgba(220,20,60,0.2);
         }
 
         .signature {
-            margin-top: 25px;
+            margin-top: 35px;
             text-align: right;
+            font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            color: #8b0000;
+            color: var(--primary);
             font-weight: 600;
+            font-size: 1.15em;
+            position: relative;
+            z-index: 1;
         }
 
         .btn {
-            margin: 30px auto 0;
+            margin: 40px auto 0;
             display: block;
-            padding: 18px 42px;
+            padding: 20px 50px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
             font-size: 18px;
-            font-weight: bold;
-            background: linear-gradient(135deg,#dc143c,#8b0000);
+            font-weight: 600;
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
             color: #fff;
+            box-shadow: 
+                0 8px 24px rgba(220,20,60,0.4),
+                0 4px 12px rgba(139,0,0,0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: btnFadeIn 2.2s ease-out 0.9s both;
+        }
+
+        @keyframes btnFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 12px 32px rgba(220,20,60,0.5),
+                0 6px 16px rgba(139,0,0,0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
         }
 
         .hidden-message {
             display: none;
-            margin-top: 25px;
-            padding: 22px;
-            border-radius: 15px;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
-            background: #fff0f0;
-            border: 2px solid #dc143c;
-            color: #8b0000;
+            background: linear-gradient(135deg, #fff0f0 0%, #ffe4e4 100%);
+            border: 2px solid var(--accent);
+            color: var(--primary);
             font-weight: 600;
+            font-size: 1.15em;
+            box-shadow: 
+                0 8px 24px rgba(220,20,60,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            animation: messageFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.8;
+        }
+
+        @keyframes messageFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.9) translateY(20px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Heart particles on message reveal */
+        .heart-particle {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            animation: heartFloat 2s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0);
+            }
+            50% {
+                transform: translateY(-100px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) scale(0.5);
+            }
         }
 
         /* =====================
            RESPONSIVE MOBILE
         ===================== */
         @media (max-width: 600px) {
-
             body {
-                padding: 10px;
+                padding: 15px 10px;
                 align-items: flex-start;
             }
 
             .container {
-                padding: 25px 20px;
-                margin-top: 25px;
-                border-radius: 22px;
+                padding: 30px 25px;
+                margin-top: 35px;
+                border-radius: 28px;
+            }
+
+            .top-rose {
+                font-size: 50px;
+                top: -25px;
             }
 
             h1 {
-                font-size: 1.9em;
-                margin-bottom: 25px;
+                font-size: 2.2em;
+                margin-bottom: 30px;
+                letter-spacing: 1px;
             }
 
             .letter-content {
-                padding: 20px;
-                font-size: .95em;
-                line-height: 1.8;
+                padding: 25px;
+                font-size: 1em;
+                line-height: 1.9;
             }
 
             .letter-content p:first-of-type::first-letter {
-                font-size: 2.1em;
+                font-size: 3em;
+                margin-top: 5px;
+            }
+
+            .signature {
+                font-size: 1.05em;
             }
 
             .btn {
                 font-size: 16px;
-                padding: 14px 30px;
+                padding: 16px 36px;
             }
 
-            .container::before {
-                font-size: 45px;
-                top: -20px;
+            .hidden-message {
+                font-size: 1.05em;
+                padding: 24px;
             }
 
-            .rose {
-                font-size: 26px;
-                opacity: .2;
+            .rose-petal {
+                font-size: 24px;
             }
         }
     </style>
@@ -202,14 +463,17 @@
 
 <body>
 
-    <div class="rose">🌹</div>
-    <div class="rose">🌹</div>
-    <div class="rose">🌹</div>
-    <div class="rose">🌹</div>
-    <div class="rose">🌹</div>
-    <div class="rose">🌹</div>
+    <!-- Floating rose petals -->
+    <div class="rose-petal">🌹</div>
+    <div class="rose-petal">🌹</div>
+    <div class="rose-petal">🌹</div>
+    <div class="rose-petal">🌹</div>
+    <div class="rose-petal">🌹</div>
+    <div class="rose-petal">🌹</div>
 
     <div class="container">
+        <div class="top-rose">🌹</div>
+        
         <h1>💌 Untuk Kamu 💌</h1>
 
         <div class="letter-content">
@@ -222,13 +486,13 @@
             <p>
                Lewat surat ini, aku cuma mau bilang selamat ulang tahun yaa, dengan umur kamu yang bertambah ini
                aku berharap kamu bisa lebih bahagia, bisa lebih mementingkan kebahagiaan kamu sendiri, kamu selalu sehat,
-               kuliah kamu lancar, aku selalu doain yang terbaik buat kamu. Aku cuma pengen kamu tau kalau di tengah lelahmu,penatmu
+               kuliah kamu lancar, aku selalu doain yang terbaik buat kamu. Aku cuma pengen kamu tau kalau di tengah lelahmu, penatmu
                masih ada orang yang mengganggap kehadiranmu itu sangat berharga. Aku masih disini dengan rasa yang sama dan tidak pernah berubah,
                menemani langkahmu tanpa menuntut apa". Aku nggak akan ke mana-mana. Aku akan selalu ada buat kamu saat kamu menginginkan kehadiran aku.
             </p>
 
             <p>
-                Aku bangga banget sama kamu, kamu hebat, kamu tangguh sudah betahan selama ini
+                Aku bangga banget sama kamu, kamu hebat, kamu tangguh sudah bertahan selama ini
             </p>
 
             <div class="signature">
@@ -237,15 +501,41 @@
             </div>
         </div>
 
-        <button class="btn" onclick="document.getElementById('msg').style.display='block'">
-            🌹 Klik untuk Pesan Khusus
+        <button class="btn" onclick="revealMessage()">
+            <span>🌹 Klik untuk Pesan Khusus</span>
         </button>
 
         <div class="hidden-message" id="msg">
-            💖 No pressure, just a reminder that you're loved🤍
+            💖 No pressure, just a reminder that you're loved 🤍
         </div>
-
     </div>
+
+    <script>
+        function revealMessage() {
+            const msg = document.getElementById('msg');
+            msg.style.display = 'block';
+            
+            // Create heart particles effect
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createHeartParticle();
+                }, i * 100);
+            }
+        }
+
+        function createHeartParticle() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-particle';
+            heart.textContent = ['❤️', '💕', '💖', '💗', '💓'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight - 100 + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+    </script>
 
 </body>
 </html>
